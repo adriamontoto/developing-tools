@@ -1,0 +1,6 @@
+# Remember to add the package, its single version and the documentation page
+
+# Install packages from requirements.txt
+-r requirements.txt
+
+pytest==8.2.2  # https://docs.pytest.org/en/latest/contents.html
