@@ -13,9 +13,18 @@ def execution_time(output_decimals: int = 10) -> Callable:
     Args:
         output_decimals (int): The number of decimal places to display in the execution time. Defaults to 10.
 
+    Raises:
+        TypeError: If the output_decimals argument is not an integer.
+        ValueError: If the output_decimals argument is a negative integer.
+
     Returns:
         Callable: A decorator that wraps a function, measuring its execution time.
     """
+    if type(output_decimals) is not int:
+        raise TypeError(f'output_decimals must be an integer, got {type(output_decimals).__name__} instead.')
+
+    if output_decimals < 0:
+        raise ValueError(f'output_decimals must be a non-negative integer, got {output_decimals} instead.')
 
     def decorator(function: Callable) -> Callable:
         """
