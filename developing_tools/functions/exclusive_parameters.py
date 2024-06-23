@@ -35,8 +35,9 @@ def exclusive_parameters(*arguments: Argument) -> Callable:
             Wrapper function to enforce argument rules.
 
             Args:
-                *args: Variable length argument list.
-                **kwargs: Arbitrary keyword arguments.
+                *args (tuple[Any]): Positional arguments passed to the decorated function.
+                **kwargs (dict[str, Any]): Keyword arguments passed to the decorated function.
+
 
             Raises:
                 ValueError: If parameters are not accepted by the function.

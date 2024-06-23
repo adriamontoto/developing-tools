@@ -42,6 +42,10 @@ def print_parameters(show_types: bool = False, include_return: bool = True) -> C
             """
             A wrapper function that prints the arguments of the decorated function.
 
+            Args:
+                *args (tuple[Any]): Positional arguments passed to the decorated function.
+                **kwargs (dict[str, Any]): Keyword arguments passed to the decorated function.
+
             Returns:
                 Any: The result of the decorated function.
             """

@@ -74,6 +74,10 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
             """
             Wrapper function that retries to execute a function a given number of times.
 
+            Args:
+                *args (tuple[Any]): Positional arguments passed to the decorated function.
+                **kwargs (dict[str, Any]): Keyword arguments passed to the decorated function.
+
             Returns:
                 Any: The result of the decorated function.
             """
