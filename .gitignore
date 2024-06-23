@@ -25,6 +25,9 @@
 # all files/folders with "___" (3 underscores) in the name
 **___**
 
+# all files inside dist folder
+dist/**
+
 ################## Files not to exclude ##################
 !.env.example
 
