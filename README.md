@@ -85,6 +85,24 @@ normal_function(1, 'Hello', c=3, d=4)
 # >>> Return value:
 # >>>         "1", supposed type str, real type int
 ```
+<br>
+
+### Timeout
+The `timeout` decorator allows you to set a maximum execution time for a function. The decorator has one parameter:
+- `seconds`: The maximum number of seconds the function is allowed to execute before raising a *TimeoutError*. Default is 10 seconds.
+
+```python
+from time import sleep
+from developing_tools.functions import timeout
+
+@timeout(seconds=2)
+def too_slow_function() -> None:
+    sleep(5)
+
+too_slow_function()
+
+# >>> TimeoutError: Function too_slow_function exceeded the 2 seconds timeout.
+```
 <br><br>
 
 
