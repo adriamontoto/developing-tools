@@ -1,12 +1,14 @@
 """
-This module contains the Argument class, which represents an argument with conditions on how it can be combined with other arguments.
+This module contains the Argument class, which represents an argument with conditions on how it can be combined with
+other arguments.
 """
 
 
-class Argument(object):
+class Argument:
     """
     Represents an argument with conditions on how it can be combined with other arguments.
     """
+
     __compatible: list[str]
     __incompatible: list[str]
 

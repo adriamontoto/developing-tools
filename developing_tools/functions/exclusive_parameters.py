@@ -1,13 +1,15 @@
 """
 This module contains a decorator to enforce compatible and incompatible argument rules on a function.
 """
+
+from collections.abc import Callable
 from functools import wraps
-from typing import Any, Callable
+from typing import Any
 
 from developing_tools.utils.argument_class import Argument
 
 
-def exclusive_parameters(*arguments: Argument) -> Callable:
+def exclusive_parameters(*arguments: Argument) -> Callable:  # noqa: C901
     """
     Decorator to enforce compatible and incompatible argument rules on a function.
 
@@ -38,7 +40,6 @@ def exclusive_parameters(*arguments: Argument) -> Callable:
                 *args (tuple[Any]): Positional arguments passed to the decorated function.
                 **kwargs (dict[str, Any]): Keyword arguments passed to the decorated function.
 
-
             Raises:
                 ValueError: If parameters are not accepted by the function.
                 ValueError: If incompatible and compatible arguments are used incorrectly.
@@ -46,7 +47,7 @@ def exclusive_parameters(*arguments: Argument) -> Callable:
             Returns:
                 Any: The result of the decorated function.
             """
-            parameters = set([parameter for sublist in arguments for parameter in sublist.arguments])
+            parameters = {parameter for sublist in arguments for parameter in sublist.arguments}
             function_parameters = set(function.__annotations__.keys())
             function_parameters.remove('return')
 
@@ -59,7 +60,7 @@ def exclusive_parameters(*arguments: Argument) -> Callable:
                 incompatible_arguments = set(argument.incompatible) & provided_arguments
 
                 if compatible_arguments and incompatible_arguments:
-                    raise ValueError(f'Incompatible arguments used together: {argument.compatible} and {argument.incompatible}')  # yapf: disable
+                    raise ValueError(f'Incompatible arguments used together: {argument.compatible} and {argument.incompatible}')  # fmt: skip  # noqa: E501
 
             return function(*args, **kwargs)
 

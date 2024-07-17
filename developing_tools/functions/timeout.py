@@ -1,9 +1,11 @@
 """
 Decorator to set a timeout for a function.
 """
+
+from collections.abc import Callable
 from functools import wraps
 from threading import Thread
-from typing import Any, Callable
+from typing import Any
 
 
 def function_execution(
@@ -28,7 +30,7 @@ def function_execution(
         function_output.append(exception)
 
 
-def timeout(seconds: int | float = 10) -> Callable:
+def timeout(seconds: int | float = 10) -> Callable:  # noqa: C901
     """
     Decorator to set a timeout for a function.
 
@@ -75,7 +77,7 @@ def timeout(seconds: int | float = 10) -> Callable:
             Returns:
                 Any: The result of the decorated function.
             """
-            result = list()  # It must be a list to be mutable inside the thread.
+            result = []  # It must be a list to be mutable inside the thread.
             thread = Thread(target=function_execution, args=(result, function, args, kwargs))
             thread.start()
 

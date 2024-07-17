@@ -1,11 +1,13 @@
 """
 This decorator prints the arguments of a function.
 """
+
+from collections.abc import Callable
 from functools import wraps
-from typing import Any, Callable
+from typing import Any
 
 
-def print_parameters(show_types: bool = False, include_return: bool = True) -> Callable:
+def print_parameters(show_types: bool = False, include_return: bool = True) -> Callable:  # noqa: C901
     """
     A decorator that prints the arguments of a function.
 
@@ -26,7 +28,7 @@ def print_parameters(show_types: bool = False, include_return: bool = True) -> C
     if type(include_return) is not bool:
         raise TypeError(f'include_return must be a boolean, got {type(include_return).__name__} instead.')
 
-    def decorator(function: Callable) -> Callable:
+    def decorator(function: Callable) -> Callable:  # noqa: C901
         """
         The actual decorator that wraps the function to print its arguments.
 
@@ -38,7 +40,7 @@ def print_parameters(show_types: bool = False, include_return: bool = True) -> C
         """
 
         @wraps(wrapped=function)
-        def wrapper(*args: tuple[Any], **kwargs: dict[str, Any]) -> Any:
+        def wrapper(*args: tuple[Any], **kwargs: dict[str, Any]) -> Any:  # noqa: C901
             """
             A wrapper function that prints the arguments of the decorated function.
 
@@ -62,7 +64,7 @@ def print_parameters(show_types: bool = False, include_return: bool = True) -> C
                     supposed_type = function.__annotations__.get(key, 'Any')
                     supposed_type = supposed_type if supposed_type == 'Any' else supposed_type.__name__
 
-                    print(f'\tArgument {key}: value "{value}", supposed type {supposed_type}, real type {type(value).__name__}')  # yapf: disable
+                    print(f'\tArgument {key}: value "{value}", supposed type {supposed_type}, real type {type(value).__name__}')  # fmt: skip  # noqa: E501
                 else:
                     print(f'\tArgument {key}: value "{value}"')
 
@@ -74,7 +76,7 @@ def print_parameters(show_types: bool = False, include_return: bool = True) -> C
                     supposed_type = function.__annotations__.get('return', 'Any')
                     supposed_type = supposed_type if supposed_type == 'Any' else supposed_type.__name__
 
-                    print(f'\t"{function_output}", supposed type {supposed_type}, real type {type(function_output).__name__}')  # yapf: disable
+                    print(f'\t"{function_output}", supposed type {supposed_type}, real type {type(function_output).__name__}')  # fmt: skip  # noqa: E501
                 else:
                     print(f'\t"{function_output}"')
 

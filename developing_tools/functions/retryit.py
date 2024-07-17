@@ -1,13 +1,15 @@
 """
 This module contains a decorator that retries to execute a function a given number of times.
 """
+
+from collections.abc import Callable
 from functools import wraps
 from random import uniform
 from time import sleep
-from typing import Any, Callable
+from typing import Any
 
 
-def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5) -> Callable:
+def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5) -> Callable:  # noqa: C901
     """
     Decorator that retries to execute a function a given number of times.
 
@@ -40,9 +42,8 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
     if type(delay) not in [int, float, tuple]:
         raise TypeError(f'The delay must be a number or a tuple. Got {type(delay).__name__} instead.')
 
-    if type(delay) in [int, float]:
-        if delay < 0:
-            raise ValueError(f'The delay must be greater than or equal to 0. Got {delay} instead.')
+    if type(delay) in [int, float] and delay < 0:
+        raise ValueError(f'The delay must be greater than or equal to 0. Got {delay} instead.')
 
     if type(delay) is tuple:
         if len(delay) != 2:
@@ -50,15 +51,15 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
 
         for element in delay:
             if type(element) not in [int, float]:
-                raise TypeError(f'Both elements of the delay tuple must be numbers. Got {type(element).__name__} instead.')  # yapf: disable
+                raise TypeError(f'Both elements of the delay tuple must be numbers. Got {type(element).__name__} instead.')  # fmt: skip  # noqa: E501
 
         if delay[0] < 0 or delay[1] < 0:
-            raise ValueError(f'Both elements of the delay tuple must be greater than or equal to 0. Got {delay} instead.')  # yapf: disable
+            raise ValueError(f'Both elements of the delay tuple must be greater than or equal to 0. Got {delay} instead.')  # fmt: skip  # noqa: E501
 
         if delay[0] >= delay[1]:
-            raise ValueError(f'The first element of the delay tuple must be less than to the second element. Got {delay} instead.')  # yapf: disable
+            raise ValueError(f'The first element of the delay tuple must be less than to the second element. Got {delay} instead.')  # fmt: skip  # noqa: E501
 
-    def decorator(function: Callable) -> Callable:
+    def decorator(function: Callable) -> Callable:  # noqa: C901
         """
         Decorator that retries to execute a function a given number of times.
 
@@ -70,7 +71,7 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
         """
 
         @wraps(wrapped=function)
-        def wrapper(*args: tuple[Any], **kwargs: dict[str, Any]) -> Any:
+        def wrapper(*args: tuple[Any], **kwargs: dict[str, Any]) -> Any:  # noqa: C901
             """
             Wrapper function that retries to execute a function a given number of times.
 
@@ -85,7 +86,7 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
             _delay = delay
             while attempts is None or attempts > 0:
                 if type(delay) is tuple:
-                    _delay = uniform(delay[0], delay[1])  # nosec
+                    _delay = uniform(a=delay[0], b=delay[1])  # noqa: S311 # nosec
 
                 if attempts:
                     print(f'Attempt [{attempt + 1}/{attempts}] to execute function "{function.__name__}".')

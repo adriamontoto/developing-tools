@@ -1,9 +1,11 @@
 """
 This module contains a decorator that prints the time it took for a function to execute.
 """
+
+from collections.abc import Callable
 from functools import wraps
 from time import perf_counter
-from typing import Any, Callable
+from typing import Any
 
 
 def execution_time(output_decimals: int = 10) -> Callable:
