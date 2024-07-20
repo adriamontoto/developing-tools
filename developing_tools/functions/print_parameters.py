@@ -28,7 +28,7 @@ def print_parameters(show_types: bool = False, include_return: bool = True) -> C
     if type(include_return) is not bool:
         raise TypeError(f'include_return must be a boolean, got {type(include_return).__name__} instead.')
 
-    def decorator(function: Callable) -> Callable:  # noqa: C901
+    def decorator(function: Callable) -> Callable:
         """
         The actual decorator that wraps the function to print its arguments.
 
@@ -40,7 +40,7 @@ def print_parameters(show_types: bool = False, include_return: bool = True) -> C
         """
 
         @wraps(wrapped=function)
-        def wrapper(*args: tuple[Any], **kwargs: dict[str, Any]) -> Any:  # noqa: C901
+        def wrapper(*args: tuple[Any], **kwargs: dict[str, Any]) -> Any:
             """
             A wrapper function that prints the arguments of the decorated function.
 

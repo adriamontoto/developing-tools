@@ -59,7 +59,7 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
         if delay[0] >= delay[1]:
             raise ValueError(f'The first element of the delay tuple must be less than to the second element. Got {delay} instead.')  # fmt: skip  # noqa: E501
 
-    def decorator(function: Callable) -> Callable:  # noqa: C901
+    def decorator(function: Callable) -> Callable:
         """
         Decorator that retries to execute a function a given number of times.
 
@@ -71,7 +71,7 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
         """
 
         @wraps(wrapped=function)
-        def wrapper(*args: tuple[Any], **kwargs: dict[str, Any]) -> Any:  # noqa: C901
+        def wrapper(*args: tuple[Any], **kwargs: dict[str, Any]) -> Any:
             """
             Wrapper function that retries to execute a function a given number of times.
 

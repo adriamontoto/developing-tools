@@ -30,7 +30,7 @@ def function_execution(
         function_output.append(exception)
 
 
-def timeout(seconds: int | float = 10) -> Callable:  # noqa: C901
+def timeout(seconds: int | float = 10) -> Callable:
     """
     Decorator to set a timeout for a function.
 

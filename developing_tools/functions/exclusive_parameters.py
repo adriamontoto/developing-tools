@@ -9,7 +9,7 @@ from typing import Any
 from developing_tools.utils.argument_class import Argument
 
 
-def exclusive_parameters(*arguments: Argument) -> Callable:  # noqa: C901
+def exclusive_parameters(*arguments: Argument) -> Callable:
     """
     Decorator to enforce compatible and incompatible argument rules on a function.
 
