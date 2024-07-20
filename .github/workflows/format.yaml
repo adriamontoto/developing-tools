@@ -1,0 +1,60 @@
+name: Format Pipeline
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.11]
+    timeout-minutes: 15
+    steps:
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Only last commit
+
+      - name: 🐍 Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - id: cache
+        name: 📦 Create cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.pythonLocation }}
+          key: ${{ runner.os }}-python-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'requirements.txt', 'requirements_dev.txt') }}
+
+      - name: 📦 Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          pip install -r requirements_dev.txt --no-warn-script-location --no-python-version-warning --no-warn-conflicts
+
+      - name: 🏃 Run Formatter
+        run: bash scripts/format.sh
+
+      - name: 📤 Commit & Push Changes
+        run: |
+          if ! git diff-index --quiet HEAD --; then
+            git config --global user.name "Formatter Action"
+            git config --global user.email "formatter@github.com"
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+
+            git add .
+            git commit -m "🔨 refactor: run automatic formatter"
+            git push origin HEAD:${{ github.ref }}
+          fi
