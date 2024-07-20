@@ -4,3 +4,7 @@
 -r requirements.txt
 
 pytest==8.2.2  # https://docs.pytest.org/en/latest/contents.html
+pytest-cov==5.0.0  # https://pytest-cov.readthedocs.io/en/latest/
+pytest-xdist[psutil]==3.6.1  # https://pytest-xdist.readthedocs.io/en/stable/
+pytest-asyncio==0.23.7  # https://pytest-asyncio.readthedocs.io/en/latest/
+pytest-randomly==3.15.0  # https://github.com/pytest-dev/pytest-randomly
