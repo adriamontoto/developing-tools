@@ -10,7 +10,7 @@ from typing import Any
 
 def function_execution(
     function_output: list[Any],
-    function: Callable,
+    function: Callable[..., Any],
     args: tuple[Any],
     kwargs: dict[str, Any],
 ) -> None:
@@ -19,7 +19,7 @@ def function_execution(
 
     Args:
         function_output (list[Any]): List to store the function result.
-        function (Callable): Function to execute.
+        function (Callable[..., Any]): Function to execute.
         args (tuple[Any]): Function positional arguments.
         kwargs (dict[str, Any]): Function keyword arguments.
     """
@@ -30,7 +30,7 @@ def function_execution(
         function_output.append(exception)
 
 
-def timeout(seconds: int | float = 10) -> Callable:
+def timeout(seconds: int | float = 10) -> Callable[..., Any]:
     """
     Decorator to set a timeout for a function.
 
@@ -42,7 +42,7 @@ def timeout(seconds: int | float = 10) -> Callable:
         ValueError: If the timeout seconds is less than or equal to zero.
 
     Returns:
-        Callable: Decorator function.
+        Callable[..., Any]: Decorator function.
     """
     if type(seconds) not in [int, float]:
         raise TypeError(f'Timeout seconds must be an integer or a float. Got {type(seconds).__name__}.')
@@ -50,15 +50,15 @@ def timeout(seconds: int | float = 10) -> Callable:
     if seconds <= 0:
         raise ValueError('Timeout seconds must be greater than zero.')
 
-    def decorator(function: Callable) -> Callable:
+    def decorator(function: Callable[..., Any]) -> Callable[..., Any]:
         """
         Decorator to set a timeout for a function.
 
         Args:
-            function (Callable): Function to decorate.
+            function (Callable[..., Any]): Function to decorate.
 
         Returns:
-            Callable: Wrapper function.
+            Callable[..., Any]: Wrapper function.
         """
 
         @wraps(wrapped=function)

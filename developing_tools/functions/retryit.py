@@ -9,7 +9,7 @@ from time import sleep
 from typing import Any
 
 
-def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5) -> Callable:  # noqa: C901
+def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5) -> Callable[..., Any]:  # noqa: C901
     """
     Decorator that retries to execute a function a given number of times.
 
@@ -30,7 +30,7 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
         ValueError: If the first element of the delay tuple is greater than or equal to the second element.
 
     Returns:
-        Callable: The decorated function.
+        Callable[..., Any]: The decorated function.
     """
     if attempts is not None:
         if type(attempts) is not int:
@@ -59,15 +59,15 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
         if delay[0] >= delay[1]:
             raise ValueError(f'The first element of the delay tuple must be less than to the second element. Got {delay} instead.')  # fmt: skip  # noqa: E501
 
-    def decorator(function: Callable) -> Callable:
+    def decorator(function: Callable[..., Any]) -> Callable[..., Any]:
         """
         Decorator that retries to execute a function a given number of times.
 
         Args:
-            function (Callable): The function to decorate.
+            function (Callable[..., Any]): The function to decorate.
 
         Returns:
-            Callable: The decorated function.
+            Callable[..., Any]: The decorated function.
         """
 
         @wraps(wrapped=function)

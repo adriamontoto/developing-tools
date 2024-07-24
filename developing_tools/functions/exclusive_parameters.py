@@ -9,7 +9,7 @@ from typing import Any
 from developing_tools.utils.argument_class import Argument
 
 
-def exclusive_parameters(*arguments: Argument) -> Callable:
+def exclusive_parameters(*arguments: Argument) -> Callable[..., Any]:
     """
     Decorator to enforce compatible and incompatible argument rules on a function.
 
@@ -17,18 +17,18 @@ def exclusive_parameters(*arguments: Argument) -> Callable:
         *arguments (Argument): Variable length Argument objects specifying compatible and incompatible argument rules.
 
     Returns:
-        Callable: The decorated function with argument validation applied.
+        Callable[..., Any]: The decorated function with argument validation applied.
     """
 
-    def decorator(function: Callable) -> Callable:
+    def decorator(function: Callable[..., Any]) -> Callable[..., Any]:
         """
         Decorates a function to enforce compatible and incompatible argument rules.
 
         Args:
-            function (Callable): The function to decorate.
+            function (Callable[..., Any]): The function to decorate.
 
         Returns:
-            Callable: The wrapped function with argument validation.
+            Callable[..., Any]: The wrapped function with argument validation.
         """
 
         @wraps(wrapped=function)

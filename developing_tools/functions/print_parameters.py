@@ -7,7 +7,7 @@ from functools import wraps
 from typing import Any
 
 
-def print_parameters(show_types: bool = False, include_return: bool = True) -> Callable:  # noqa: C901
+def print_parameters(show_types: bool = False, include_return: bool = True) -> Callable[..., Any]:  # noqa: C901
     """
     A decorator that prints the arguments of a function.
 
@@ -20,7 +20,7 @@ def print_parameters(show_types: bool = False, include_return: bool = True) -> C
         TypeError: If the include_return argument is not a boolean.
 
     Returns:
-        Callable: A decorator that wraps a function, printing its arguments.
+        Callable[..., Any]: A decorator that wraps a function, printing its arguments.
     """
     if type(show_types) is not bool:
         raise TypeError(f'show_types must be a boolean, got {type(show_types).__name__} instead.')
@@ -28,15 +28,15 @@ def print_parameters(show_types: bool = False, include_return: bool = True) -> C
     if type(include_return) is not bool:
         raise TypeError(f'include_return must be a boolean, got {type(include_return).__name__} instead.')
 
-    def decorator(function: Callable) -> Callable:
+    def decorator(function: Callable[..., Any]) -> Callable[..., Any]:
         """
         The actual decorator that wraps the function to print its arguments.
 
         Args:
-            function (Callable): The function to be decorated.
+            function (Callable[..., Any]): The function to be decorated.
 
         Returns:
-            Callable: The wrapped function with argument printing.
+            Callable[..., Any]: The wrapped function with argument printing.
         """
 
         @wraps(wrapped=function)

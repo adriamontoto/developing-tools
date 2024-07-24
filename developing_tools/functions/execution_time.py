@@ -8,7 +8,7 @@ from time import perf_counter
 from typing import Any
 
 
-def execution_time(output_decimals: int = 10) -> Callable:
+def execution_time(output_decimals: int = 10) -> Callable[..., Any]:
     """
     A decorator that measures and prints the execution time of a function.
 
@@ -20,7 +20,7 @@ def execution_time(output_decimals: int = 10) -> Callable:
         ValueError: If the output_decimals argument is a negative integer.
 
     Returns:
-        Callable: A decorator that wraps a function, measuring its execution time.
+        Callable[..., Any]: A decorator that wraps a function, measuring its execution time.
     """
     if type(output_decimals) is not int:
         raise TypeError(f'output_decimals must be an integer, got {type(output_decimals).__name__} instead.')
@@ -28,15 +28,15 @@ def execution_time(output_decimals: int = 10) -> Callable:
     if output_decimals < 0:
         raise ValueError(f'output_decimals must be a non-negative integer, got {output_decimals} instead.')
 
-    def decorator(function: Callable) -> Callable:
+    def decorator(function: Callable[..., Any]) -> Callable[..., Any]:
         """
         The actual decorator that wraps the function to measure its execution time.
 
         Args:
-            function (Callable): The function to be decorated.
+            function (Callable[..., Any]): The function to be decorated.
 
         Returns:
-            Callable: The wrapped function with execution time measurement.
+            Callable[..., Any]: The wrapped function with execution time measurement.
         """
 
         @wraps(wrapped=function)
