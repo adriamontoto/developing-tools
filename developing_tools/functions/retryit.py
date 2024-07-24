@@ -98,13 +98,13 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
 
                 except Exception as exception:
                     # Remove the last character from the error message if it is a period
-                    exception = str(exception)[:-1] if str(exception).endswith('.') else str(exception)
+                    error_message = str(exception)[:-1] if str(exception).endswith('.') else str(exception)
 
                     if (attempt + 1) == attempts:
-                        print(f'Function failed with error: "{exception}". No more attempts.')
+                        print(f'Function failed with error: "{error_message}". No more attempts.')
                         return
 
-                    print(f'Function failed with error: "{exception}". Retrying in {_delay:.2f} seconds ...')
+                    print(f'Function failed with error: "{error_message}". Retrying in {_delay:.2f} seconds ...')
                     sleep(_delay)  # type: ignore
 
                     attempt += 1
