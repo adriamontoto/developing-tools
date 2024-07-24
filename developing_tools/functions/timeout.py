@@ -77,7 +77,7 @@ def timeout(seconds: int | float = 10) -> Callable[..., Any]:
             Returns:
                 Any: The result of the decorated function.
             """
-            result = []  # It must be a list to be mutable inside the thread.
+            result: list[Any] = []  # It must be a list to be mutable inside the thread.
             thread = Thread(target=function_execution, args=(result, function, args, kwargs))
             thread.start()
 
