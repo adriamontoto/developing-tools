@@ -5,6 +5,10 @@
 # Environment files
 **.env**
 
+# Lintting files
+.coverage
+index.txt
+
 ################### Folders to exclude ###################
 # all IDE folders
 **vscode**
