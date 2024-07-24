@@ -4,24 +4,27 @@ The "Developing Tools" project is a Python 🐍 package designed to enhance the 
 These tools ⚒️ are intended to assist developers in identifying performance bottlenecks, handling transient errors, and gaining insights into function behavior during runtime. The package is easy to install and use, making it a good addition to any Python developer's toolkit 🚀.
 <br><br>
 
-
 ## Table of Contents
+
 - [Installation](#installation)
 - [Utilization](#utilization)
 - [License](#license)
-<br><br>
-
+  <br><br>
 
 ## Installation
+
 ```bash
 pip install developing-tools
 ```
+
 <br><br>
 
-
 ## Utilization
+
 ### Execution Time
+
 The `execution_time` decorator allows you to measure the execution time of a function. The decorator has one parameter:
+
 - `output_decimals`: Number of decimal places to display in the output. Default is 10.
 
 ```python
@@ -36,11 +39,14 @@ too_slow_function()
 
 # >>> Function "too_slow_function" took 2.00 seconds to execute.
 ```
+
 <br>
 
 ### Retry It
+
 The `retryit` decorator allows you to retry a function multiple times in case of failure. The decorator has two parameters:
-- `attempts`: The number of attempts to execute the function, if *None* the function will be executed indefinitely. Default is *None*.
+
+- `attempts`: The number of attempts to execute the function, if _None_ the function will be executed indefinitely. Default is _None_.
 - `delay`: The delay between attempts in seconds, if a tuple is provided the delay will be randomized between the two values. Default is 5 seconds.
 
 ```python
@@ -58,12 +64,15 @@ failing_function()
 # >>> Attempt [3/3] to execute function "failing_function".
 # >>> Function failed with error: "This function always fails!". No more attempts.
 ```
+
 <br>
 
 ### Print Parameters
+
 The `print_parameters` decorator allows you to print the parameters of a function. The decorator has two parameters:
-- `show_types`: If *True* the decorator will print the types of the parameters. Default is *False*.
-- `include_return`: If *True* the decorator will print the return value of the function. Default is *True*.
+
+- `show_types`: If _True_ the decorator will print the types of the parameters. Default is _False_.
+- `include_return`: If _True_ the decorator will print the return value of the function. Default is _True_.
 
 ```python
 from developing_tools.functions import print_parameters
@@ -85,11 +94,14 @@ normal_function(1, 'Hello', c=3, d=4)
 # >>> Return value:
 # >>>         "1", supposed type str, real type int
 ```
+
 <br>
 
 ### Timeout
+
 The `timeout` decorator allows you to set a maximum execution time for a function. The decorator has one parameter:
-- `seconds`: The maximum number of seconds the function is allowed to execute before raising a *TimeoutError*. Default is 10 seconds.
+
+- `seconds`: The maximum number of seconds the function is allowed to execute before raising a _TimeoutError_. Default is 10 seconds.
 
 ```python
 from time import sleep
@@ -103,8 +115,9 @@ too_slow_function()
 
 # >>> TimeoutError: Function too_slow_function exceeded the 2 seconds timeout.
 ```
+
 <br><br>
 
-
 ## License
+
 This project is licensed under the terms of the [MIT license](https://choosealicense.com/licenses/mit/).
