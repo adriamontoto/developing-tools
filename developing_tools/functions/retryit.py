@@ -4,7 +4,7 @@ This module contains a decorator that retries to execute a function a given numb
 
 from collections.abc import Callable
 from functools import wraps
-from random import uniform
+from random import SystemRandom
 from time import sleep
 from typing import Any
 
@@ -86,7 +86,7 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
             _delay = delay
             while attempts is None or attempts > 0:
                 if type(delay) is tuple:
-                    _delay = uniform(a=delay[0], b=delay[1])  # noqa: S311 # nosec
+                    _delay = SystemRandom().uniform(a=delay[0], b=delay[1])
 
                 if attempts:
                     print(f'Attempt [{attempt + 1}/{attempts}] to execute function "{function.__name__}".')
