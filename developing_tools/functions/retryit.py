@@ -42,7 +42,7 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
     if type(delay) not in [int, float, tuple]:
         raise TypeError(f'The delay must be a number or a tuple. Got {type(delay).__name__} instead.')
 
-    if type(delay) in [int, float] and delay < 0:
+    if type(delay) in [int, float] and delay < 0:  # type: ignore
         raise ValueError(f'The delay must be greater than or equal to 0. Got {delay} instead.')
 
     if type(delay) is tuple:
@@ -105,7 +105,7 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
                         return
 
                     print(f'Function failed with error: "{exception}". Retrying in {_delay:.2f} seconds ...')
-                    sleep(_delay)
+                    sleep(_delay)  # type: ignore
 
                     attempt += 1
             return
