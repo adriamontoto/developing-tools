@@ -1,4 +1,19 @@
 # 🐣💻 Developing Tools
+<p align="center">
+    <a href="https://github.com/adriamontoto/developing-tools/actions/workflows/test.yaml?event=push&branch=develop" target="_blank">
+        <img src="https://github.com/adriamontoto/developing-tools/actions/workflows/test.yaml/badge.svg?event=push&branch=master" alt="Test Pipeline">
+    </a>
+    <a href="https://github.com/adriamontoto/developing-tools/actions/workflows/lint.yaml?event=push&branch=develop" target="_blank">
+        <img src="https://github.com/adriamontoto/developing-tools/actions/workflows/lint.yaml/badge.svg?event=push&branch=master" alt="Lint Pipeline">
+    </a>
+    <a href="https://pypi.org/project/developing-tools" target="_blank">
+        <img src="https://img.shields.io/pypi/v/developing-tools?color=%2334D058&label=pypi%20package" alt="Package version">
+    </a>
+    <a href="https://pypi.org/project/developing-tools/" target="_blank">
+        <img src="https://img.shields.io/pypi/pyversions/developing-tools.svg?color=%2334D058" alt="Supported Python versions">
+    </a>
+</p>
+
 The "Developing Tools" project is a Python 🐍 package designed to enhance the development process by providing a collection of tools/utilities aimed at improving debugging, performance measurement, error handling, ...
 
 These tools ⚒️ are intended to assist developers in identifying performance bottlenecks, handling transient errors, and gaining insights into function behavior during runtime. The package is easy to install and use, making it a good addition to any Python developer's toolkit 🚀.
