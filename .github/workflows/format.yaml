@@ -17,9 +17,12 @@ jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
         python-version: [3.11]
+
+    name: Format Pipeline - Python ${{ matrix.python-version }} on ${{ matrix.os }}
     timeout-minutes: 15
     steps:
       - name: 📥 Checkout the repository
@@ -37,24 +40,20 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ env.pythonLocation }}
-          key: ${{ runner.os }}-python-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'requirements.txt', 'requirements_dev.txt') }}
+          key: ${{ runner.os }}-python-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'requirements*') }}
+          restore-keys: ${{ runner.os }}-python-${{ matrix.python-version }}-
 
       - name: 📦 Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          pip install -r requirements_dev.txt --no-warn-script-location --no-python-version-warning --no-warn-conflicts
+        run: make install-dev
 
       - name: 🏃 Run Formatter
-        run: bash scripts/format.sh
+        run: make format
 
       - name: 📤 Commit & Push Changes
-        run: |
-          if ! git diff-index --quiet HEAD --; then
-            git config --global user.name "Formatter Action"
-            git config --global user.email "formatter@github.com"
-            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-
-            git add .
-            git commit -m "🔨 refactor: run automatic formatter"
-            git push origin HEAD:${{ github.ref }}
-          fi
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: .
+          message: '🔨 refactor: run automatic formatter'
+          commit: --signoff
+          default_author: github_actions
