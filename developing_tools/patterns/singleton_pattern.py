@@ -4,6 +4,7 @@ Singleton Pattern metaclass to be used in the creation of singletons.
 
 from threading import Lock
 from typing import Any, ClassVar
+from typing_extensions import override
 
 
 class SingletonPattern(type):
@@ -14,6 +15,7 @@ class SingletonPattern(type):
     __instances: ClassVar = {}
     __lock: Lock = Lock()
 
+    @override
     def __call__(cls, *args: tuple[Any], **kwargs: dict[str, Any]) -> Any:
         """
         Returns the singleton instance of the class. If the instance does not exist, it creates a new one using the
