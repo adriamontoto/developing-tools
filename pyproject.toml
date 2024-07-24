@@ -54,7 +54,7 @@ xfail_strict = true
 
 [tool.coverage.run]
 parallel = true
-source = ['tate']
+source = ['developing_tools']
 
 [tool.coverage.report]
 show_missing = true
