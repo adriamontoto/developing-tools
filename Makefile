@@ -47,3 +47,17 @@ coverage: # Get coverage report
 	coverage combine; \
 	coverage report; \
 	exit $$coverage_exit
+
+
+.PHONY: clean
+clean: # Remove all generated files
+	@rm -f `find . -type f -name '*.py[coi]'`
+	@rm -rf `find . -name __pycache__`
+	@rm -rf `find . -name .ruff_cache`
+	@rm -rf `find . -name .mypy_cache`
+	@rm -rf `find . -name index.txt`
+	@rm -rf `find . -name .pytest_cache`
+	@rm -f .coverage
+	@rm -f .coverage.*
+	@rm -rf coverage.xml
+	@rm -rf htmlcov
