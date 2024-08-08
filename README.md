@@ -8,6 +8,9 @@
     <a href="https://github.com/adriamontoto/developing-tools/actions/workflows/lint.yaml?event=push&branch=develop" target="_blank">
         <img src="https://github.com/adriamontoto/developing-tools/actions/workflows/lint.yaml/badge.svg?event=push&branch=master" alt="Lint Pipeline">
     </a>
+        <a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/adriamontoto/developing-tools" target="_blank">
+        <img src="https://coverage-badge.samuelcolvin.workers.dev/adriamontoto/developing-tools.svg" alt="Coverage Pipeline">
+    </a>
     <a href="https://pypi.org/project/developing-tools" target="_blank">
         <img src="https://img.shields.io/pypi/v/developing-tools?color=%2334D058&label=pypi%20package" alt="Package version">
     </a>
@@ -164,4 +167,3 @@ This project is licensed under the terms of the [MIT license](https://choosealic
 <p align="right">
     <a href="#readme-top">🔼 Back to top</a>
 </p>
-
