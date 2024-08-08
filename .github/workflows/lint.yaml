@@ -53,3 +53,15 @@ jobs:
         with:
           name: type_coverage_report_${{ runner.os }}_${{ matrix.python-version }}
           path: index.txt
+
+  # This job does nothing and is only used for the branch protection
+  check-all:
+    needs: [lint]
+    if: always()
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ✅ All lint tests passed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
