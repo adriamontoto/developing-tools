@@ -54,12 +54,28 @@ xfail_strict = true
 
 
 [tool.coverage.run]
-parallel = true
 source = ['developing_tools']
+parallel = true
+branch = true
+relative_files = true
 
 [tool.coverage.report]
 show_missing = true
 skip_covered = true
+precision = 2
+exclude_lines = [
+    'pragma: no cover',
+    'raise NotImplementedError',
+    'if TYPE_CHECKING:',
+    'if typing.TYPE_CHECKING:',
+    '@overload',
+    '@typing.overload',
+    'typing.assert_never',
+    'assert_never',
+]
+
+[tool.coverage.paths]
+source = ['developing_tools']
 
 
 [tool.ruff]
