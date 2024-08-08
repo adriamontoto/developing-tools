@@ -1,3 +1,5 @@
+<a name="readme-top"></a>
+
 # 🐣💻 Developing Tools
 <p align="center">
     <a href="https://github.com/adriamontoto/developing-tools/actions/workflows/test.yaml?event=push&branch=develop" target="_blank">
@@ -26,12 +28,22 @@ These tools ⚒️ are intended to assist developers in identifying performance 
 - [License](#license)
 <br><br>
 
+<p align="right">
+    <a href="#readme-top">🔼 Back to top</a>
+</p>
+
+
 
 ## Installation
 ```bash
 pip install developing-tools
 ```
 <br><br>
+
+<p align="right">
+    <a href="#readme-top">🔼 Back to top</a>
+</p>
+
 
 
 ## Utilization
@@ -53,6 +65,10 @@ too_slow_function()
 # >>> Function "too_slow_function" took 2.00 seconds to execute.
 ```
 <br>
+
+<p align="right">
+    <a href="#readme-top">🔼 Back to top</a>
+</p>
 
 ### Retry It
 The `retryit` decorator allows you to retry a function multiple times in case of failure. The decorator has two parameters:
@@ -76,6 +92,11 @@ failing_function()
 # >>> Function failed with error: "This function always fails!". No more attempts.
 ```
 <br>
+
+<p align="right">
+    <a href="#readme-top">🔼 Back to top</a>
+</p>
+
 
 ### Print Parameters
 The `print_parameters` decorator allows you to print the parameters of a function. The decorator has two parameters:
@@ -105,6 +126,10 @@ normal_function(1, 'Hello', c=3, d=4)
 ```
 <br>
 
+<p align="right">
+    <a href="#readme-top">🔼 Back to top</a>
+</p>
+
 ### Timeout
 The `timeout` decorator allows you to set a maximum execution time for a function. The decorator has one parameter:
 
@@ -124,6 +149,17 @@ too_slow_function()
 ```
 <br><br>
 
+<p align="right">
+    <a href="#readme-top">🔼 Back to top</a>
+</p>
+
+
 
 ## License
 This project is licensed under the terms of the [MIT license](https://choosealicense.com/licenses/mit/).
+<br><br>
+
+<p align="right">
+    <a href="#readme-top">🔼 Back to top</a>
+</p>
+
