@@ -23,9 +23,9 @@ These tools ⚒️ are intended to assist developers in identifying performance 
 
 
 ## Table of Contents
-- [Installation](#installation)
-- [Utilization](#utilization)
-- [License](#license)
+- [📥 Installation](#installation)
+- [💻 Utilization](#utilization)
+- [🔑 License](#license)
 <br><br>
 
 <p align="right">
@@ -34,7 +34,8 @@ These tools ⚒️ are intended to assist developers in identifying performance 
 
 
 
-## Installation
+<a name="installation"></a>
+## 📥 Installation
 ```bash
 pip install developing-tools
 ```
@@ -46,7 +47,8 @@ pip install developing-tools
 
 
 
-## Utilization
+<a name="utilization"></a>
+## 💻 Utilization
 ### Execution Time
 The `execution_time` decorator allows you to measure the execution time of a function. The decorator has one parameter:
 
@@ -154,8 +156,8 @@ too_slow_function()
 </p>
 
 
-
-## License
+<a name="license"></a>
+## 🔑 License
 This project is licensed under the terms of the [MIT license](https://choosealicense.com/licenses/mit/).
 <br><br>
 
