@@ -51,7 +51,7 @@ coverage: # Get coverage report
 
 .PHONY: clean
 clean: # Remove all generated files
-	@rm -f `find . -type f -name '*.py[coi]'`
+	@rm -f `find . -type f -name '*.py[co]'`
 	@rm -rf `find . -name __pycache__`
 	@rm -rf `find . -name .ruff_cache`
 	@rm -rf `find . -name .mypy_cache`
