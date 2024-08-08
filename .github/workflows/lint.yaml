@@ -11,7 +11,7 @@ on:
       - synchronize
 
 jobs:
-  test:
+  lint:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
