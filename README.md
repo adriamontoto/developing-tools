@@ -80,11 +80,13 @@ The `retryit` decorator allows you to retry a function multiple times in case of
 
 - `attempts`: The number of attempts to execute the function, if _None_ the function will be executed indefinitely. Default is _None_.
 - `delay`: The delay between attempts in seconds, if a tuple is provided the delay will be randomized between the two values. Default is 5 seconds.
+- `raise_exception`: If _True_ the decorator will raise the last caught exception if the function fails all attempts. Default is _True_.
+- `valid_exceptions`: A tuple of exceptions that the decorator should catch and retry the function, if _None_ the decorator will catch all exceptions. Default is _None_.
 
 ```python
 from developing_tools.functions import retryit
 
-@retryit(attempts=3, delay=0.5)
+@retryit(attempts=3, delay=0.5, raise_exception=True, valid_exceptions=(ValueError,))
 def failing_function() -> None:
     raise ValueError('This function always fails!')
 
@@ -95,6 +97,17 @@ failing_function()
 # >>> Function failed with error: "This function always fails!". Retrying in 0.50 seconds ...
 # >>> Attempt [3/3] to execute function "failing_function".
 # >>> Function failed with error: "This function always fails!". No more attempts.
+# Traceback (most recent call last):
+#   File "<file_path>/main.py", line 7, in <module>
+#     failing_function()
+#   File "<file_path>/developing_tools/functions/retryit.py", line 132, in wrapper
+#     raise exception
+#   File "<file_path>/developing_tools/functions/retryit.py", line 124, in wrapper
+#     return function(*args, **kwargs)
+#            ^^^^^^^^^^^^^^^^^^^^^^^^^
+#   File "<file_path>/main.py", line 5, in failing_function
+#     raise ValueError('This function always fails!')
+# ValueError: This function always fails!
 ```
 <br>
 
