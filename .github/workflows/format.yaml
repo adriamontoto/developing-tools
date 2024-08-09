@@ -23,7 +23,7 @@ jobs:
         python-version: [3.12]
 
     name: Format Pipeline - Python ${{ matrix.python-version }} on ${{ matrix.os }}
-    timeout-minutes: 15
+    timeout-minutes: 5
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v4

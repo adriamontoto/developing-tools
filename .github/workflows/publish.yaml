@@ -15,7 +15,7 @@ jobs:
       id-token: write
 
     name: Publish Pipeline
-    timeout-minutes: 15
+    timeout-minutes: 5
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v4
