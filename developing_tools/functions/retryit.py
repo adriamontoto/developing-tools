@@ -9,7 +9,11 @@ from time import sleep
 from typing import Any
 
 
-def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5) -> Callable[..., Any]:  # noqa: C901
+def retryit(  # noqa: C901
+    attempts: int | None = None,
+    delay: float | tuple[float, float] = 5,
+    raise_exception: bool = True,
+) -> Callable[..., Any]:
     """
     Decorator that retries to execute a function a given number of times.
 
@@ -18,6 +22,8 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
         indefinitely until it succeeds or the program is interrupted. Default is None.
         delay (float | tuple[float, float], optional): The number of seconds to wait before each attempt, if a tuple is
         provided, a random delay between the two values will be used (both included). Default is 5 seconds.
+        raise_exception (bool, optional): Whether to raise an exception if the function fails after all attempts.
+        Default is True.
 
     Raises:
         TypeError: If the number of attempts is not an integer.
@@ -28,6 +34,7 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
         ValueError: If the delay tuple does not have 2 elements.
         ValueError: If the delay tuple has elements that are less than 0.
         ValueError: If the first element of the delay tuple is greater than or equal to the second element.
+        TypeError: If raise_exception is not a boolean.
 
     Returns:
         Callable[..., Any]: The decorated function.
@@ -58,6 +65,9 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
 
         if delay[0] >= delay[1]:
             raise ValueError(f'The first element of the delay tuple must be less than to the second element. Got {delay} instead.')  # fmt: skip  # noqa: E501
+
+    if type(raise_exception) is not bool:
+        raise TypeError(f'raise_exception must be a boolean. Got {type(raise_exception).__name__} instead.')
 
     def decorator(function: Callable[..., Any]) -> Callable[..., Any]:
         """
@@ -102,6 +112,9 @@ def retryit(attempts: int | None = None, delay: float | tuple[float, float] = 5)
 
                     if (attempt + 1) == attempts:
                         print(f'Function failed with error: "{error_message}". No more attempts.')
+                        if raise_exception:
+                            raise exception
+
                         return
 
                     print(f'Function failed with error: "{error_message}". Retrying in {_delay:.2f} seconds ...')
