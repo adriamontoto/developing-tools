@@ -13,6 +13,7 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
+    name: Smokeshow Pipeline
     timeout-minutes: 5
     steps:
       - name: 🐍 Set up Python 3.12
