@@ -13,6 +13,7 @@ def retryit(  # noqa: C901
     attempts: int | None = None,
     delay: float | tuple[float, float] = 5,
     raise_exception: bool = True,
+    valid_exceptions: tuple[type[Exception]] | None = None,
 ) -> Callable[..., Any]:
     """
     Decorator that retries to execute a function a given number of times.
@@ -24,6 +25,8 @@ def retryit(  # noqa: C901
         provided, a random delay between the two values will be used (both included). Default is 5 seconds.
         raise_exception (bool, optional): Whether to raise an exception if the function fails after all attempts.
         Default is True.
+        valid_exceptions (tuple[type[Exception]], optional): A tuple of exceptions that should be caught and
+        retried. If None, all exceptions will be caught. Default is None. Exception subclasses are also caught.
 
     Raises:
         TypeError: If the number of attempts is not an integer.
@@ -35,6 +38,9 @@ def retryit(  # noqa: C901
         ValueError: If the delay tuple has elements that are less than 0.
         ValueError: If the first element of the delay tuple is greater than or equal to the second element.
         TypeError: If raise_exception is not a boolean.
+        TypeError: If valid_exceptions is not a tuple.
+        ValueError: If valid_exceptions is empty.
+        TypeError: If the elements of valid_exceptions are not exception types.
 
     Returns:
         Callable[..., Any]: The decorated function.
@@ -68,6 +74,17 @@ def retryit(  # noqa: C901
 
     if type(raise_exception) is not bool:
         raise TypeError(f'raise_exception must be a boolean. Got {type(raise_exception).__name__} instead.')
+
+    if valid_exceptions is not None:
+        if not isinstance(valid_exceptions, tuple):
+            raise TypeError(f'valid_exceptions must be a tuple. Got {type(valid_exceptions).__name__} instead.')
+
+        if not len(valid_exceptions):
+            raise ValueError('valid_exceptions must have at least one element.')
+
+        for exception in valid_exceptions:
+            if not isinstance(exception, type) or not issubclass(exception, Exception):  # type: ignore
+                raise TypeError(f'All elements of valid_exceptions must be exception types. Got {type(exception).__name__} instead.')  # fmt: skip  # noqa: E501
 
     def decorator(function: Callable[..., Any]) -> Callable[..., Any]:
         """
@@ -106,7 +123,7 @@ def retryit(  # noqa: C901
                 try:
                     return function(*args, **kwargs)
 
-                except Exception as exception:
+                except valid_exceptions or Exception as exception:  # noqa: B030
                     error_message = str(exception).rstrip('.')
 
                     if (attempt + 1) == attempts:
