@@ -107,8 +107,7 @@ def retryit(  # noqa: C901
                     return function(*args, **kwargs)
 
                 except Exception as exception:
-                    # Remove the last character from the error message if it is a period
-                    error_message = str(exception)[:-1] if str(exception).endswith('.') else str(exception)
+                    error_message = str(exception).rstrip('.')
 
                     if (attempt + 1) == attempts:
                         print(f'Function failed with error: "{error_message}". No more attempts.')
@@ -119,8 +118,8 @@ def retryit(  # noqa: C901
 
                     print(f'Function failed with error: "{error_message}". Retrying in {_delay:.2f} seconds ...')
                     sleep(_delay)  # type: ignore
-
                     attempt += 1
+
             return
 
         return wrapper
