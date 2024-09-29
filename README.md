@@ -2,20 +2,20 @@
 
 # 🐣💻 Developing Tools
 <p align="center">
-    <a href="https://github.com/adriamontoto/developing-tools/actions/workflows/test.yaml?event=push&branch=develop" target="_blank">
+    <a href="https://github.com/adriamontoto/developing-tools/actions/workflows/test.yaml?event=push&branch=master" target="_blank">
         <img src="https://github.com/adriamontoto/developing-tools/actions/workflows/test.yaml/badge.svg?event=push&branch=master" alt="Test Pipeline">
     </a>
-    <a href="https://github.com/adriamontoto/developing-tools/actions/workflows/lint.yaml?event=push&branch=develop" target="_blank">
+    <a href="https://github.com/adriamontoto/developing-tools/actions/workflows/lint.yaml?event=push&branch=master" target="_blank">
         <img src="https://github.com/adriamontoto/developing-tools/actions/workflows/lint.yaml/badge.svg?event=push&branch=master" alt="Lint Pipeline">
     </a>
         <a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/adriamontoto/developing-tools" target="_blank">
         <img src="https://coverage-badge.samuelcolvin.workers.dev/adriamontoto/developing-tools.svg" alt="Coverage Pipeline">
     </a>
     <a href="https://pypi.org/project/developing-tools" target="_blank">
-        <img src="https://img.shields.io/pypi/v/developing-tools?color=%2334D058&label=pypi%20package" alt="Package version">
+        <img src="https://img.shields.io/pypi/v/developing-tools?color=%2334D058&label=pypi%20package" alt="Package Version">
     </a>
     <a href="https://pypi.org/project/developing-tools/" target="_blank">
-        <img src="https://img.shields.io/pypi/pyversions/developing-tools.svg?color=%2334D058" alt="Supported Python versions">
+        <img src="https://img.shields.io/pypi/pyversions/developing-tools.svg?color=%2334D058" alt="Supported Python Versions">
     </a>
 </p>
 
