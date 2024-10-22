@@ -1,7 +1,7 @@
 # Remember to add the package, its single version and the documentation page
 
 # Install packages from requirements.txt
--r requirements.txt
+--requirement requirements.txt
 
 freezegun>=1.0.0,<2.0.0  # https://github.com/spulec/freezegun
 pytest>=8.0.0,<9.0.0  # https://docs.pytest.org
