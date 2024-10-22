@@ -1,6 +1,6 @@
-full_sources = developing_tools tests
-sources = developing_tools
-configuration_file = pyproject.toml 
+FULL_SOURCES = developing_tools tests
+SOURCES = developing_tools
+CONFIGURATION_FILE = pyproject.toml 
 
 
 .PHONY: help
@@ -26,29 +26,29 @@ install-prod: # Install production dependencies
 
 .PHONY: format
 format: # Automatically format python code
-	@ruff check $(full_sources) --fix-only --config $(configuration_file)
-	@ruff format $(full_sources) --config $(configuration_file)
+	@ruff check $(FULL_SOURCES) --fix-only --config $(CONFIGURATION_FILE)
+	@ruff format $(FULL_SOURCES) --config $(CONFIGURATION_FILE)
 
 
 .PHONY: lint
 lint: # Lint python code
 	@set -e; \
-	mypy $(full_sources) --txt-report . --config-file $(configuration_file) || mypy_exit=$$?; \
-	bandit $(sources) --recursive --configfile $(configuration_file) || bandit_exit=$$?; \
-	ruff check $(full_sources) || ruff_exit=$$?; \
+	mypy $(FULL_SOURCES) --txt-report . --config-file $(CONFIGURATION_FILE) || mypy_exit=$$?; \
+	bandit $(SOURCES) --recursive --configfile $(CONFIGURATION_FILE) || bandit_exit=$$?; \
+	ruff check $(FULL_SOURCES) || ruff_exit=$$?; \
 	exit $$(( mypy_exit || bandit_exit || ruff_exit ))
 
 
 .PHONY: test
 test: # Run all tests
-	@pytest --config-file $(configuration_file)
+	@pytest --config-file $(CONFIGURATION_FILE)
 
 
 .PHONY: coverage
 coverage: # Get coverage report
 	@set -e; \
 	coverage erase; \
-	coverage run --module pytest --config-file $(configuration_file) || coverage_exit=$$?; \
+	coverage run --module pytest --config-file $(CONFIGURATION_FILE) || coverage_exit=$$?; \
 	coverage combine; \
 	coverage report; \
 	exit $$coverage_exit
