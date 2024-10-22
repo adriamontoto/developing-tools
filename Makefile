@@ -10,13 +10,18 @@ help: # Display this help
 
 
 .PHONY: install
-install: # Install production dependencies
-	@pip install -r requirements.txt
+install: # Install dependencies
+	@make install-dev
 
 
 .PHONY: install-dev
 install-dev: # Install development dependencies
-	@pip install -r requirements_dev.txt
+	@pip install --requirement requirements_dev.txt
+
+
+.PHONY: install-prod
+install-prod: # Install production dependencies
+	@pip install --requirement requirements.txt
 
 
 .PHONY: format
@@ -43,7 +48,7 @@ test: # Run all tests
 coverage: # Get coverage report
 	@set -e; \
 	coverage erase; \
-	coverage run -m pytest --config-file $(configuration_file) || coverage_exit=$$?; \
+	coverage run --module pytest --config-file $(configuration_file) || coverage_exit=$$?; \
 	coverage combine; \
 	coverage report; \
 	exit $$coverage_exit
@@ -51,13 +56,13 @@ coverage: # Get coverage report
 
 .PHONY: clean
 clean: # Remove all generated files
-	@rm -f `find . -type f -name '*.py[co]'`
-	@rm -rf `find . -name __pycache__`
-	@rm -rf `find . -name .ruff_cache`
-	@rm -rf `find . -name .mypy_cache`
-	@rm -rf `find . -name index.txt`
-	@rm -rf `find . -name .pytest_cache`
-	@rm -f .coverage
-	@rm -f .coverage.*
-	@rm -rf coverage.xml
-	@rm -rf htmlcov
+	@rm --force --recursive `find . -type f -name '*.py[co]'`
+	@rm --force --recursive `find . -name __pycache__`
+	@rm --force --recursive `find . -name .ruff_cache`
+	@rm --force --recursive `find . -name .mypy_cache`
+	@rm --force --recursive `find . -name index.txt`
+	@rm --force --recursive `find . -name .pytest_cache`
+	@rm --force --recursive .coverage
+	@rm --force --recursive .coverage.*
+	@rm --force --recursive coverage.xml
+	@rm --force --recursive htmlcov
