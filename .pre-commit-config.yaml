@@ -4,11 +4,11 @@
 fail_fast: true # If there is an error it will fail the test
 
 default_language_version:
-  python: python3.11
+  python: python3.12
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: no-commit-to-branch
         name: 🛡️ Protected Branches Checker
@@ -60,7 +60,7 @@ repos:
           - commit
 
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.18.4
+    rev: v8.20.1
     hooks:
       - id: gitleaks
         name: 🔍 Secrets Checker
