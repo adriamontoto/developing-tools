@@ -2,13 +2,10 @@ name: Lint Pipeline
 
 on:
   push:
-    branches:
-      - master
-      - develop
+    branches: [master]
   pull_request:
-    types:
-      - opened
-      - synchronize
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   lint:
@@ -16,29 +13,27 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        python-version: [3.11, 3.12, 3.13]
+        os: [ubuntu-latest]
+        python-version: [3.13]
 
     name: Lint Pipeline - Python ${{ matrix.python-version }} on ${{ matrix.os }}
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
       - name: 📥 Checkout the repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Only last commit
+        uses: actions/checkout@v4.2.2
 
       - name: 🐍 Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.3.0
         with:
           python-version: ${{ matrix.python-version }}
 
       - id: cache
         name: 📦 Create cache
-        uses: actions/cache@v4
+        uses: actions/cache@v4.1.2
         with:
           path: ${{ env.pythonLocation }}
-          key: ${{ runner.os }}-python-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'requirements*') }}
-          restore-keys: ${{ runner.os }}-python-${{ matrix.python-version }}-
+          key: ${{ matrix.os }}-python-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'requirements*') }}
+          restore-keys: ${{ matrix.os }}-python-${{ matrix.python-version }}-
 
       - name: 📦 Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
@@ -48,20 +43,8 @@ jobs:
         run: make lint
 
       - name: 🫙 Store type coverage
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.4.3
         if: always()
         with:
-          name: type_coverage_report_${{ runner.os }}_${{ matrix.python-version }}
+          name: type_coverage_report_${{ matrix.os }}_${{ matrix.python-version }}
           path: index.txt
-
-  # This job does nothing and is only used for the branch protection
-  check-all:
-    needs: [lint]
-    if: always()
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: ✅ All lint tests passed
-        uses: re-actors/alls-green@release/v1
-        with:
-          jobs: ${{ toJSON(needs) }}

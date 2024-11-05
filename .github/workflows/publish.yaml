@@ -6,7 +6,13 @@ on:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.13]
+
     environment:
       name: pypi
       url: https://pypi.org/p/developing-tools
@@ -18,14 +24,12 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: 📥 Checkout the repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Only last commit
+        uses: actions/checkout@v4.2.2
 
-      - name: 🐍 Set up Python 3.13
-        uses: actions/setup-python@v5
+      - name: 🐍 Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5.3.0
         with:
-          python-version: 3.13
+          python-version: ${{ matrix.python-version }}
 
       - name: 📦 Install dependencies
         run: pip install build
@@ -34,10 +38,10 @@ jobs:
         run: python -m build
 
       - name: 🫙 Store distribution package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: python-package-distributions
           path: dist/
 
       - name: 🚀 Publish
-        uses: pypa/gh-action-pypi-publish@v1.8.14
+        uses: pypa/gh-action-pypi-publish@v1.11.0
