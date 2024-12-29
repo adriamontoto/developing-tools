@@ -5,7 +5,7 @@ Test ExecutionTimeBlock context manager.
 from datetime import UTC, datetime
 
 from freezegun import freeze_time
-from pytest import CaptureFixture, mark, raises as pytest_raises
+from pytest import CaptureFixture, mark, raises as assert_raises
 
 from developing_tools.context_managers import ExecutionTimeBlock
 
@@ -95,7 +95,7 @@ def test_execution_time_manager_invalid_title_type(title: str) -> None:
     Args:
         title (str): Title for the code block being timed.
     """
-    with pytest_raises(
+    with assert_raises(
         expected_exception=TypeError,
         match=f'Title must be a string, got {type(title).__name__} instead.',
     ):
@@ -108,7 +108,7 @@ def test_execution_time_manager_title_can_not_be_changed() -> None:
     """
     context = ExecutionTimeBlock(title='Test Block', output_decimals=5)
 
-    with pytest_raises(expected_exception=AttributeError):
+    with assert_raises(expected_exception=AttributeError):
         context.title = 'New Title'  # type: ignore
 
 
@@ -121,7 +121,7 @@ def test_execution_time_manager_invalid_output_decimals_type(output_decimals: in
     Args:
         output_decimals (int): Number of decimal places to include in the printed execution time.
     """
-    with pytest_raises(
+    with assert_raises(
         expected_exception=TypeError,
         match=f'output_decimals must be an integer, got {type(output_decimals).__name__} instead.',
     ):
@@ -137,7 +137,7 @@ def test_execution_time_manager_invalid_output_decimals_value(output_decimals: i
     Args:
         output_decimals (int): Number of decimal places to include in the printed execution time.
     """
-    with pytest_raises(
+    with assert_raises(
         expected_exception=ValueError,
         match=f'output_decimals must be a non-negative integer, got {output_decimals} instead.',
     ):
@@ -151,7 +151,7 @@ def test_execution_time_manager_output_decimals_can_not_be_changed() -> None:
     """
     context = ExecutionTimeBlock(title='Test Block', output_decimals=5)
 
-    with pytest_raises(expected_exception=AttributeError):
+    with assert_raises(expected_exception=AttributeError):
         context.output_decimals = 3  # type: ignore
 
 
@@ -161,7 +161,7 @@ def test_execution_time_manager_start_time_can_not_be_changed() -> None:
     """
     context = ExecutionTimeBlock(title='Test Block', output_decimals=5)
 
-    with pytest_raises(expected_exception=AttributeError):
+    with assert_raises(expected_exception=AttributeError):
         context.start_time = 3.5  # type: ignore
 
 
@@ -171,7 +171,7 @@ def test_execution_time_manager_end_time_can_not_be_changed() -> None:
     """
     context = ExecutionTimeBlock(title='Test Block', output_decimals=5)
 
-    with pytest_raises(expected_exception=AttributeError):
+    with assert_raises(expected_exception=AttributeError):
         context.end_time = 3.5  # type: ignore
 
 
@@ -182,5 +182,5 @@ def test_execution_time_manager_execution_time_can_not_be_changed() -> None:
     """
     context = ExecutionTimeBlock(title='Test Block', output_decimals=5)
 
-    with pytest_raises(expected_exception=AttributeError):
+    with assert_raises(expected_exception=AttributeError):
         context.execution_time = 3.5  # type: ignore
