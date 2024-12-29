@@ -15,7 +15,7 @@ name = 'developing-tools'
 description = 'The Developing Tools project is a Python package designed to enhance the development process by providing a collection of tools/utilities aimed at improving debugging, performance measurement, error handling, ...'
 readme = './README.md'
 authors = [{ name = 'Adria Montoto' }]
-license = 'MIT'
+license = './LICENSE.md'
 classifiers = [
     'License :: OSI Approved :: MIT License',
     'Intended Audience :: Developers',
