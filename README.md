@@ -1,6 +1,7 @@
 <a name="readme-top"></a>
 
 # 🐣💻 Developing Tools
+
 <p align="center">
     <a href="https://github.com/adriamontoto/developing-tools/actions/workflows/test.yaml?event=push&branch=master" target="_blank">
         <img src="https://github.com/adriamontoto/developing-tools/actions/workflows/test.yaml/badge.svg?event=push&branch=master" alt="Test Pipeline">
@@ -19,41 +20,43 @@
     </a>
 </p>
 
-The "Developing Tools" project is a Python 🐍 package designed to enhance the development process by providing a collection of tools/utilities aimed at improving debugging, performance measurement, error handling, ...
+The **Developing Tools** project is a Python 🐍 package designed to enhance the development process by providing a collection of tools/utilities aimed at improving debugging, performance measurement, error handling, ...
 
 These tools ⚒️ are intended to assist developers in identifying performance bottlenecks, handling transient errors, and gaining insights into function behavior during runtime. The package is easy to install and use, making it a good addition to any Python developer's toolkit 🚀.
 <br><br>
 
-
 ## Table of Contents
+
 - [📥 Installation](#installation)
 - [💻 Utilization](#utilization)
+- [🤝 Contributing](#contributing)
 - [🔑 License](#license)
-<br><br>
 
 <p align="right">
     <a href="#readme-top">🔼 Back to top</a>
-</p>
-
-
+</p><br><br>
 
 <a name="installation"></a>
+
 ## 📥 Installation
+
+You can install **Developing Tools** using `pip`:
+
 ```bash
 pip install developing-tools
 ```
-<br><br>
 
 <p align="right">
     <a href="#readme-top">🔼 Back to top</a>
-</p>
-
-
+</p><br><br>
 
 <a name="utilization"></a>
+
 ## 💻 Utilization
+
 ### Execution Time
-The `execution_time` decorator allows you to measure the execution time of a function. The decorator has one parameter:
+
+The [`execution_time`](https://github.com/adriamontoto/developing-tools/blob/master/developing_tools/functions/execution_time.py) decorator allows you to measure the execution time of a function. The decorator has one parameter:
 
 - `output_decimals`: Number of decimal places to display in the output. Default is 10.
 
@@ -69,14 +72,14 @@ too_slow_function()
 
 # >>> Function "too_slow_function" took 2.00 seconds to execute.
 ```
-<br>
 
 <p align="right">
     <a href="#readme-top">🔼 Back to top</a>
 </p>
 
 ### Retry It
-The `retryit` decorator allows you to retry a function multiple times in case of failure. The decorator has two parameters:
+
+The [`retryit`](https://github.com/adriamontoto/developing-tools/blob/master/developing_tools/functions/retryit.py) decorator allows you to retry a function multiple times in case of failure. The decorator has two parameters:
 
 - `attempts`: The number of attempts to execute the function, if _None_ the function will be executed indefinitely. Default is _None_.
 - `delay`: The delay between attempts in seconds, if a tuple is provided the delay will be randomized between the two values. Default is 5 seconds.
@@ -109,15 +112,14 @@ failing_function()
 #     raise ValueError('This function always fails!')
 # ValueError: This function always fails!
 ```
-<br>
 
 <p align="right">
     <a href="#readme-top">🔼 Back to top</a>
 </p>
 
-
 ### Print Parameters
-The `print_parameters` decorator allows you to print the parameters of a function. The decorator has two parameters:
+
+The [`print_parameters`](https://github.com/adriamontoto/developing-tools/blob/master/developing_tools/functions/print_parameters.py) decorator allows you to print the parameters of a function. The decorator has two parameters:
 
 - `show_types`: If _True_ the decorator will print the types of the parameters. Default is _False_.
 - `include_return`: If _True_ the decorator will print the return value of the function. Default is _True_.
@@ -142,14 +144,14 @@ normal_function(1, 'Hello', c=3, d=4)
 # >>> Return value:
 # >>>         "1", supposed type str, real type int
 ```
-<br>
 
 <p align="right">
     <a href="#readme-top">🔼 Back to top</a>
 </p>
 
 ### Timeout
-The `timeout` decorator allows you to set a maximum execution time for a function. The decorator has one parameter:
+
+The [`timeout`](https://github.com/adriamontoto/developing-tools/blob/master/developing_tools/functions/timeout.py) decorator allows you to set a maximum execution time for a function. The decorator has one parameter:
 
 - `seconds`: The maximum number of seconds the function is allowed to execute before raising a _TimeoutError_. Default is 10 seconds.
 
@@ -165,17 +167,82 @@ too_slow_function()
 
 # >>> TimeoutError: Function too_slow_function exceeded the 2 seconds timeout.
 ```
-<br><br>
+
+<a name="contributing"></a>
+
+## 🤝 Contributing
+
+We welcome contributions to **Developing Tools**! To ensure a smooth collaboration process, please follow the guidelines below.
+
+### How to Contribute
+
+**1. Fork the Repository:** Click the "Fork" button at the top right of the repository page.
+
+**2. Clone Your Fork:**
+
+```bash
+git clone git+ssh://git@github.com/<your-username>/developing-tools.git
+```
+
+**3. Create a Branch:**
+
+```bash
+git checkout -b feature/your-feature-name
+```
+
+**4. Make Your Changes:** Implement your new feature or fix a bug.
+
+**5. Run Tests:** Ensure all the following tests pass before submitting your changes.
+
+- Run tests:
+
+```bash
+make test
+```
+
+- Run tests with coverage:
+
+```bash
+make coverage
+```
+
+- Run linter:
+
+```bash
+make lint
+```
+
+- Run formatter:
+
+```bash
+make format
+```
+
+**6. Commit Your Changes:**
+
+```bash
+git commit -m "✨ feature: your feature description"
+```
+
+**7. Push to Your Fork:**
+
+```bash
+git push origin feature/your-feature-name
+```
+
+**8. Create a Pull Request:** Navigate to the original repository and create a pull request from your fork.
+
+**9. Wait for Review:** Your pull request will be reviewed by the maintainers. Make any necessary changes based on their feedback.
 
 <p align="right">
     <a href="#readme-top">🔼 Back to top</a>
-</p>
-
+</p><br><br>
 
 <a name="license"></a>
+
 ## 🔑 License
-This project is licensed under the terms of the [MIT license](https://choosealicense.com/licenses/mit/).
-<br><br>
+
+This project is licensed under the terms of the [`MIT license`](https://github.com/adriamontoto/developing-tools/blob/master/LICENSE.md).
 
 <p align="right">
     <a href="#readme-top">🔼 Back to top</a>
