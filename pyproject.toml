@@ -12,8 +12,8 @@ include = ['developing_tools/', 'tests/', 'requirements*.txt']
 
 [project]
 name = 'developing-tools'
-description = 'Package designed to enhance the development process by providing a collection of tools/utilities'
-readme = 'README.md'
+description = 'The Developing Tools project is a Python package designed to enhance the development process by providing a collection of tools/utilities aimed at improving debugging, performance measurement, error handling, ...'
+readme = './README.md'
 authors = [{ name = 'Adria Montoto' }]
 license = 'MIT'
 classifiers = [
@@ -60,9 +60,6 @@ addopts = [
 markers = [
     'unit_testing: Check a unique funtionality',
     'integration_testing: Check the integration between two or more functions',
-    'e2e_testing: Check the end to end functionality of the application',
-    'performance_testing: Check the performance of the application',
-    'security_testing: Check the security of the application',
 ]
 xfail_strict = true
 
@@ -154,33 +151,11 @@ max-complexity = 10
 
 [tool.ruff.lint.pydocstyle]
 convention = 'pep257'
-property-decorators = ['sqlalchemy.ext.hybrid.hybrid_property']
-
-[tool.ruff.lint.pep8-naming]
-classmethod-decorators = [
-    'pydantic.field_validator', # Allow Pydantic's @field_validator decorator to trigger class method treatment.
-    'pydantic.model_validator', # Allow Pydantic's @model_validator decorator to trigger class method treatment.
-    'declared_attr',            # Allow SQLAlchemy's dynamic decorators, like @field.expression, to trigger class method treatment.
-    'expression',               # Allow SQLAlchemy's dynamic decorators, like @field.expression, to trigger class method treatment.
-    'comparator',               # Allow SQLAlchemy's dynamic decorators, like @field.expression, to trigger class method treatment.
-]
-
-[tool.ruff.lint.flake8-bugbear]
-extend-immutable-calls = [
-    'fastapi.Body',
-    'fastapi.Cookie',
-    'fastapi.Depends',
-    'fastapi.File',
-    'fastapi.Form',
-    'fastapi.Header',
-    'fastapi.Path',
-    'fastapi.Query',
-]
 
 [tool.ruff.lint.isort]
 case-sensitive = true
 extra-standard-library = ['typing_extensions']
-known-first-party = ['src', 'backend', 'app']
+known-first-party = ['developing_tools']
 combine-as-imports = true
 
 
