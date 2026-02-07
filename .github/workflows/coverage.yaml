@@ -30,7 +30,7 @@ jobs:
         run: pip install smokeshow
 
       - name: 📥 Download coverage files
-        uses: actions/download-artifact@v4.1.8
+        uses: actions/download-artifact@v7.0.0
         with:
           name: coverage-html
           path: htmlcov
